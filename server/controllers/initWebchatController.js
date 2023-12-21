@@ -60,13 +60,13 @@ const sendUserMessage = (conversationSid, identity, messageBody) => {
         });
 };
 
-const sendWelcomeMessage = (conversationSid, customerFriendlyName) => {
+const sendWelcomeMessage = (conversationSid) => {
     logInterimAction("Sending welcome message");
     return getTwilioClient()
         .conversations.conversations(conversationSid)
         .messages.create({
-            body: `Welcome ${customerFriendlyName}! An agent will be with you in just a moment.`,
-            author: "Concierge"
+            body: "Welcome to the NAMI HelpLine. If you are in crisis, text CRISIS. Before you proceed, please review our terms of use, linked above. If you understand and agree to the terms of use, text GO.",
+            author: "NAMI HelpLine"
         })
         .then(() => {
             logInterimAction("(async) Welcome message sent");
@@ -79,7 +79,7 @@ const sendWelcomeMessage = (conversationSid, customerFriendlyName) => {
 const initWebchatController = async (request, response) => {
     logInitialAction("Initiating webchat");
 
-    const customerFriendlyName = request.body?.formData?.friendlyName || "Customer";
+    const customerFriendlyName = request.body?.formData?.friendlyName || "Anonymous";
 
     let conversationSid;
     let identity;
@@ -96,12 +96,14 @@ const initWebchatController = async (request, response) => {
     const token = createToken(identity);
 
     // OPTIONAL — if user query is defined
+    sendWelcomeMessage(conversationSid);
     if (request.body?.formData?.query) {
         // use it to send a message in behalf of the user with the query as body
-        sendUserMessage(conversationSid, identity, request.body.formData.query).then(() =>
-            // and then send another message from Concierge, letting the user know that an agent will help them soon
-            sendWelcomeMessage(conversationSid, customerFriendlyName)
-        );
+        sendUserMessage(conversationSid, identity, request.body.formData.query);
+        // .then(() =>
+        //     // and then send another message from Concierge, letting the user know that an agent will help them soon
+        //     sendWelcomeMessage(conversationSid, customerFriendlyName)
+        // );
     }
 
     response.send({

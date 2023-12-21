@@ -109,8 +109,8 @@ export const MessageBubble = ({
         }
     };
 
-    const author = users?.find((u) => u.identity === message.author)?.friendlyName || message.author;
-
+    // let author = users?.find((u) => u.identity === message.author)?.friendlyName || message.author;
+    const author = belongsToCurrentUser ? "You" : "NAMI HelpLine";
     return (
         <Box
             {...outerContainerStyles}

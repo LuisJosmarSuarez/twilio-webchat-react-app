@@ -4,6 +4,7 @@ import { Box } from "@twilio-paste/core/box";
 import { Text } from "@twilio-paste/core/text";
 import { Spinner } from "@twilio-paste/core/spinner";
 import { Message } from "@twilio/conversations";
+import { Anchor } from "@twilio-paste/core/anchor";
 import throttle from "lodash.throttle";
 
 import { MessageBubble } from "./MessageBubble";
@@ -163,6 +164,20 @@ export const MessageList = () => {
     const renderChatStarted = () =>
         hasLoadedAllMessages ? (
             <>
+                <Box {...conversationEventContainerStyles}>
+                    <Text as="h3" {...conversationEventTitleStyles} data-test="chat-started">
+                        NAMI Helpline
+                    </Text>
+                    <Text as="p" {...conversationEventDateStyles}>
+                        10AM - 10PM ET
+                    </Text>
+                    <Text as="p" {...conversationEventDateStyles}>
+                        Monday through Friday
+                    </Text>
+                    <Anchor href="https://nami.link/hltos" showExternal>
+                        Terms of Service
+                    </Anchor>
+                </Box>
                 <Box {...conversationEventContainerStyles}>
                     <Text as="h3" {...conversationEventTitleStyles} data-test="chat-started">
                         Chat started

@@ -49,8 +49,10 @@ export const ConversationEnded = () => {
                 <Fragment />
             )}
             <Text as="p" {...textStyles}>
-                If you have any more questions, feel free to reach out again.
+                Please tell us about your experience by taking{" "}
+                <a href="https://naminational.typeform.com/helpline#source=chat">this survey</a>.
             </Text>
+
             <Button variant="primary" data-test="start-new-chat-button" onClick={handleStartNewChat}>
                 Start new chat
             </Button>
