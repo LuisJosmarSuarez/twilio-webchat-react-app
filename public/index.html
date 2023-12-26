@@ -41,11 +41,17 @@
 	<script>
 		window.addEventListener("DOMContentLoaded", () => {
 			Twilio.initWebchat({
-				serverUrl: "%REACT_APP_SERVER_URL%",
+				serverUrl: "https://twilio-webchat-react-3205-dev.twil.io",
 				theme: {
 					isLight: true
-				}
+				},
+				fileAttachment: {
+					enabled: true,
+					maxFileSize: 16777216, // 16 MB
+					acceptedExtensions: ["jpg", "jpeg", "png", "amr", "mp3", "mp4", "pdf"]
+				},
 			})
+			
 		})
 	</script>
 </body>

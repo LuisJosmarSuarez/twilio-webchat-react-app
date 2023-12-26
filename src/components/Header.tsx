@@ -13,8 +13,6 @@ export const Header = ({ customTitle }: { customTitle?: string }) => {
     }));
 
     const endChat = async () => {
-        console.log("Clicked end chat");
-        console.log(conversation);
         await contactBackend("/endConversation", {
             conversationSid: conversation?.sid
         });

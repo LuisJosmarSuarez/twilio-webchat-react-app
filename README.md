@@ -58,13 +58,22 @@ The environment variables associated with enabling and configuring customer tran
 
 ### 1. Start the Local Backend Server
 
+Your server will be served at http://localhost:3001/. You can choose one of the following options:
+
+#### 1.1. Use the React backend Server
+
 ```shell
 yarn server
 ```
 
-Your server will be served at http://localhost:3001/.
+#### 1.2. Use the Twilio Serverless server
 
-### 2. Start the Local React App Server
+```shell
+cd serverless
+twilio serverless:start
+```
+
+### 2. Start the Local Server
 
 ```shell
 yarn start
@@ -244,6 +253,16 @@ In order to use this widget in production you will need to follow these three st
 
 It is necessary to create two endpoints on a remote server or as serverless functions, for [initWebchat](#1-initwebchat) and [refreshToken](#2-refreshtoken) logic.
 
+### Deploying the serverless functions
+
+In order to deploy the serverless functions you need to have the [twilio-cli](https://www.twilio.com/docs/twilio-cli/quickstart) and [twilio-serverless toolkit](https://www.twilio.com/docs/labs/serverless-toolkit/getting-started) installed.
+
+```shell
+// Run the following commands starting from the root folder of the project
+cd serverless
+twilio serverless:deploy
+```
+
 ### Security Best Practises
 
 We highly recommend that you implement as many of the following security controls as possible, in order to have a more secure backend.
@@ -287,7 +306,8 @@ For more information about the available options, please check the [Configuratio
 <script>
     window.addEventListener("DOMContentLoaded", () => {
         Twilio.initWebchat({
-            serverUrl: "%SERVER_URL%" // IMPORTANT, UPDATE THIS!!
+            serverUrl: "https://twilio-webchat-react-3205-dev.twil.io"
+            // serverUrl: "%SERVER_URL%" // IMPORTANT, UPDATE THIS!!
         });
     });
 </script>
