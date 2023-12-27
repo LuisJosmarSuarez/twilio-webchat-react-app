@@ -27,6 +27,7 @@ exports.handler = async (context, event, callback) => {
         // Change Task status
         const tasks = await client.taskrouter.v1.workspaces(workspaceSid).tasks.list({
             evaluateTaskAttributes: `conversationSid =='${conversationSid}'`,
+            assignmentStatus: possibleTaskStatus.join(","),
             limit: 1
         });
         if (tasks.length > 0) {
